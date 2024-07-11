@@ -2,7 +2,11 @@ module back
 
 go 1.18
 
-require github.com/gogf/gf/v2 v2.5.2
+require github.com/gogf/gf/v2 v2.5.3
+
+require github.com/go-sql-driver/mysql v1.7.1 // indirect
+
+require github.com/gogf/gf/contrib/drivers/mysql/v2 v2.5.3
 
 require (
 	github.com/BurntSushi/toml v1.2.0 // indirect
