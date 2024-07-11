@@ -2,7 +2,7 @@
     <div class="search-bar">
         <el-input v-model="input"
             placeholder="请输入要搜索的内容, 宁可少字也不要错字~~" class="search-input"></el-input>
-        <el-button plain class="search-but" @click="toSearch">
+        <el-button plain class="search-but">
             <i class="el-icon-search"></i>搜索
         </el-button>
     </div>
