@@ -1,7 +1,7 @@
 import request from './request';
 
 export default {
-    getTable, queryDetail
+    getTable, queryDetail, changeSolution, changeDescription
 }
 
 export function getTable() {
@@ -16,5 +16,21 @@ export function queryDetail(params) {
         method : 'GET',
         url:'/problem/query-detail',
         params: params
+    })
+}
+
+export function changeSolution(data) {
+    return request({
+        method : 'POST',
+        url:'/problem/query-detail',
+        data: data
+    })
+}
+
+export function changeDescription(data) {
+    return request({
+        method : 'POST',
+        url:'/problem/query-detail',
+        data: data
     })
 }

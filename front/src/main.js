@@ -6,11 +6,14 @@ import VueRouter from 'vue-router'
 import router from "./router/index"
 import axios from 'axios'
 import api from './util/index.js'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(VueRouter)
 
+Vue.use(mavonEditor)
 Vue.prototype.$api = api
 Vue.prototype.$axios = axios
 
