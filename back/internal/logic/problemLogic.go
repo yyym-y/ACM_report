@@ -1,6 +1,7 @@
 package logic
 
 import (
+	"back/api"
 	"back/api/problem"
 	"back/internal/dao"
 )
@@ -20,4 +21,18 @@ func (*ProblemLogic) ReadProblemDetail(problemId int) problem.ProblemDetail {
 	return *problem.NewP_DetailWithData(
 		problemId, descrip, solution,
 	)
+}
+
+func (*ProblemLogic) ChangeDescription(problemId int, text string) api.ApiRes {
+	type_ := "codeforce"
+	success := false
+	if descripeListDao.CheckIfExist(problemId, type_) {
+		success = descripeListDao.UpdataDescription(problemId, type_, text)
+	} else {
+		success = descripeListDao.InsertDescription(problemId, type_, text)
+	}
+	if !success {
+		return *api.ErrorRes("change description error")
+	}
+	return *api.SuccessResNone()
 }

@@ -14,7 +14,7 @@ export function getTable() {
 export function queryDetail(params) {
     return request({
         method : 'GET',
-        url:'/problem/query-detail',
+        url:'/problem/queryDetail',
         params: params
     })
 }
@@ -30,7 +30,7 @@ export function changeSolution(data) {
 export function changeDescription(data) {
     return request({
         method : 'POST',
-        url:'/problem/query-detail',
+        url:'/problem/changeDescription',
         data: data
     })
 }

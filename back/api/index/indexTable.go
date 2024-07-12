@@ -7,6 +7,8 @@ type IndexTableInfo struct {
 	Type_id      int
 	Solve_time   string
 	Diff_id      int
+	Type         string
+	Diff         string
 }
 
 func NewIndexTableInfo() *IndexTableInfo {

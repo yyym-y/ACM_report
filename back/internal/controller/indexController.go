@@ -16,5 +16,6 @@ func NewIndexController() *IndexController {
 var indexTableLogic = logic.NewIndexTableLogic()
 
 func (*IndexController) Table(r *ghttp.Request) {
+	r.Response.CORSDefault()
 	r.Response.WriteJson(api.SuccessRes(indexTableLogic.Serve()))
 }

@@ -12,6 +12,7 @@
         style="min-height:20px; margin-top: 10px;"
         :toolbars="toolbars"
         @save="HandleSave"
+        ref="md"
     ></mavon-editor>
   </div>
 </template>
@@ -24,12 +25,12 @@ export default {
         return {
             toolbars: {
                     trash: true, // 清空
-                    save: true, // 保存（触发events中的save事件）
+                    save: true, // 保存
                     navigation: true // 导航目录
             },
             ifEdit : false,
             ifTool : false,
-            bottomText : "编辑文本"
+            bottomText : "编辑文本",
         }
     },
     methods : {
@@ -42,7 +43,7 @@ export default {
         },
         HandleSave() {
             EventBus.$emit(this.type, {
-                text : this.context
+                text : this.$refs.md.d_value
             })
         }
     }

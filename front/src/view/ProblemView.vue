@@ -33,15 +33,18 @@ export default {
             this.solution = this.detail.Solution
         })
         EventBus.$on("description", (payload) => {
-            this.api.project.changeDescription({
+            console.log(payload)
+            console.log(payload.text)
+            this.$api.project.changeDescription({
                 Problem_id : id,
                 text : payload.text
             }).then((res)=> {
                 res = res.data;
+                console.log(res)
             })
         });
         EventBus.$on("solution", (payload) => {
-            this.api.project.changeSolution({
+            this.$api.project.changeSolution({
                 Problem_id : id,
                 text : payload.text
             }).then((res)=> {

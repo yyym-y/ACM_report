@@ -17,11 +17,23 @@ CREATE TABLE solution_list(
     solution TEXT NOT NULL
 );
 
+CREATE TABLE descripe_list(
+    problem_id int NOT NULL,
+    descripe_type VARCHAR(30) NOT NULL,
+    description TEXT NOT NULL
+);
+
+CREATE TABLE descripe_type(
+    descripe_type_id int NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
+    descripe_name VARCHAR(20)
+);
+
 # type_list(type_id, type_name);
 CREATE TABLE type_list(
     type_id INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
     type_name VARCHAR(30) UNIQUE NOT NULL
 );
+
 
 # difficulty(diff_id, diff_name);
 CREATE TABLE difficulty(
@@ -30,3 +42,6 @@ CREATE TABLE difficulty(
 );
 
 SHOW TABLES;
+
+DROP TABLE descripe_type;
+DROP TABLE descripe_list;
