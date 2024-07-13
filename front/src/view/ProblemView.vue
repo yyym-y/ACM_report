@@ -40,7 +40,10 @@ export default {
                 text : payload.text
             }).then((res)=> {
                 res = res.data;
-                console.log(res)
+                if(res.code == 0) {
+                    this.$message.error("保存失败"); return
+                }
+                this.$message.success("保存成功");
             })
         });
         EventBus.$on("solution", (payload) => {
@@ -49,6 +52,10 @@ export default {
                 text : payload.text
             }).then((res)=> {
                 res = res.data;
+                if(res.code == 0) {
+                    this.$message.error("保存失败"); return
+                }
+                this.$message.success("保存成功");
             })
         });
     },

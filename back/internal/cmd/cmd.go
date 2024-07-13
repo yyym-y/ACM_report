@@ -28,6 +28,7 @@ var (
 			s.Group("/problem", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
 				group.POST("/changeDescription", problemController.ChangeDescription)
+				group.POST("/changeSolution", problemController.ChangeSolution)
 				group.GET("/queryDetail", problemController.QueryDetail)
 			})
 			s.Run()

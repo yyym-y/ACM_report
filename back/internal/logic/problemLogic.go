@@ -36,3 +36,16 @@ func (*ProblemLogic) ChangeDescription(problemId int, text string) api.ApiRes {
 	}
 	return *api.SuccessResNone()
 }
+
+func (*ProblemLogic) ChangeSolution(problemId int, text string) api.ApiRes {
+	success := false
+	if solutioonListDao.CheckIfExist(problemId) {
+		success = solutioonListDao.UpdataSolution(problemId, text)
+	} else {
+		success = solutioonListDao.InsertSolution(problemId, text)
+	}
+	if !success {
+		return *api.ErrorRes("change solution error")
+	}
+	return *api.SuccessResNone()
+}

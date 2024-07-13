@@ -28,3 +28,10 @@ func (c *ProblemController) ChangeDescription(r *ghttp.Request) {
 	text := r.GetForm("text").String()
 	r.Response.WriteJson(problemLogic.ChangeDescription(problemId, text))
 }
+
+func (c *ProblemController) ChangeSolution(r *ghttp.Request) {
+	r.Response.CORSDefault()
+	problemId := r.GetForm("Problem_id").Int()
+	text := r.GetForm("text").String()
+	r.Response.WriteJson(problemLogic.ChangeSolution(problemId, text))
+}

@@ -22,7 +22,7 @@ export function queryDetail(params) {
 export function changeSolution(data) {
     return request({
         method : 'POST',
-        url:'/problem/query-detail',
+        url:'/problem/changeSolution',
         data: data
     })
 }
