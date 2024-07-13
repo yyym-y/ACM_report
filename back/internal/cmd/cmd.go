@@ -21,9 +21,10 @@ var (
 			problemController := controller.NewProblemController()
 			s.Group("/index", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
-				group.Bind(
-					indexController,
-				)
+				group.POST("/insertProblem", indexController.InsertProblem)
+				group.POST("/updataProblem", indexController.UpdataProblem)
+				group.POST("/deleteProblem", indexController.DeleteProblem)
+				group.GET("/table", indexController.Table)
 			})
 			s.Group("/problem", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)

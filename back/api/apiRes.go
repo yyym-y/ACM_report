@@ -24,6 +24,14 @@ func ErrorRes(msg string) *ApiRes {
 	}
 }
 
+func CheckSuccessNone(flag bool, errMsg string) *ApiRes {
+	if flag {
+		return SuccessResNone()
+	} else {
+		return ErrorRes(errMsg)
+	}
+}
+
 type ApiRes struct {
 	Code int    `json:"code"`
 	Msg  string `json:"msg"`

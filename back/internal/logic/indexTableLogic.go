@@ -1,7 +1,9 @@
 package logic
 
 import (
+	"back/api"
 	"back/api/index"
+	"back/api/problem"
 	"back/internal/dao"
 )
 
@@ -23,4 +25,19 @@ func (*IndexTableLogic) Serve() (res []index.IndexTableInfo) {
 		res[i] = v
 	}
 	return
+}
+
+func (*IndexTableLogic) InsertProblem(data problem.ProblemInfo) api.ApiRes {
+	flag := problemListDao.InsertProblem(data)
+	return *api.CheckSuccessNone(flag, "insert error")
+}
+
+func (*IndexTableLogic) UpdataProblem(problemId int, data problem.ProblemInfo) api.ApiRes {
+	flag := problemListDao.UpdataProblem(problemId, data)
+	return *api.CheckSuccessNone(flag, "updata error")
+}
+
+func (*IndexTableLogic) DeleteProblem(problemId int) api.ApiRes {
+	flag := problemListDao.DeleteProblem(problemId)
+	return *api.CheckSuccessNone(flag, "delete error")
 }
