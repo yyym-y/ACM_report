@@ -28,6 +28,7 @@ INSERT INTO problem_list VALUES(14, "D. Smithing Skill", "https://codeforces.com
 
 SELECT * from problem_list;
 SELECT * FROM descripe_list;
+SELECT * FROM solution_list;
 
 DELETE FROM descripe_list WHERE problem_id=9;
 

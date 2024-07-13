@@ -64,7 +64,7 @@ export default {
         })
     },
     mounted() {
-        this.controlSize()
+        
     },
     methods : {
         handleEdit(data) {
@@ -72,15 +72,6 @@ export default {
         },
         handleLook(data) {
             this.$router.push({ name : "problem", query: data })
-        },
-        controlSize() {
-            const elem = this.$refs["table"]
-            window.addEventListener('resize', () => {
-                const maxWidth = 1000;
-                const width = window.innerWidth > maxWidth? maxWidth : window.innerWidth;
-                console.log(elem)
-                elem.width = `${width}px`;
-            });
         }
     }
 }

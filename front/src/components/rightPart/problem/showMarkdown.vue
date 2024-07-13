@@ -20,7 +20,7 @@
 <script>
 import { EventBus } from '@/bus/EventBus'
 export default {
-    props: ["context", "type"],
+    props: ["context", "type", "problemId"],
     data() {
         return {
             toolbars: {
@@ -43,9 +43,13 @@ export default {
         },
         HandleSave() {
             EventBus.$emit(this.type, {
+                problemId : this.problemId,
                 text : this.$refs.md.d_value
             })
         }
+    },
+    beforeDestroy () {
+        EventBus.$off(this.type)
     }
 }
 </script>

@@ -18,7 +18,6 @@ var problemLogic = logic.NewProblemLogic()
 func (c *ProblemController) QueryDetail(r *ghttp.Request) {
 	r.Response.CORSDefault()
 	problemId := r.GetQuery("Problem_id").Int()
-	println(problemId)
 	r.Response.WriteJson(api.SuccessRes(problemLogic.ReadProblemDetail(problemId)))
 }
 

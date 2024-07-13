@@ -1,8 +1,8 @@
 <template>
   <div>
-    <showMarkdownVue :context="description" :type="'description'"></showMarkdownVue>
+    <showMarkdownVue :context="description" :type="'description'" :problemId="infos.Problem_id"></showMarkdownVue>
     <el-divider></el-divider>
-    <showMarkdownVue :context="solution" :type="'solution'"></showMarkdownVue>
+    <showMarkdownVue :context="solution" :type="'solution'" :problemId="infos.Problem_id"></showMarkdownVue>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
             console.log(payload)
             console.log(payload.text)
             this.$api.project.changeDescription({
-                Problem_id : id,
+                Problem_id : payload.problemId,
                 text : payload.text
             }).then((res)=> {
                 res = res.data;
@@ -48,7 +48,7 @@ export default {
         });
         EventBus.$on("solution", (payload) => {
             this.$api.project.changeSolution({
-                Problem_id : id,
+                Problem_id : payload.problemId,
                 text : payload.text
             }).then((res)=> {
                 res = res.data;
