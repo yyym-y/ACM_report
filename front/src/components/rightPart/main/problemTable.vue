@@ -36,12 +36,7 @@
         </el-table-column>
         <el-table-column label="操作" width="150">
         <template slot-scope="scope">
-            <el-button
-            size="mini"
-            @click="handleEdit(scope.row)">编辑</el-button>
-            <el-button
-            size="mini"
-            @click="handleLook(scope.row)">查看</el-button>
+            <editButtonVue :data="scope.row"></editButtonVue>
         </template>
         </el-table-column>
   </el-table>
@@ -51,9 +46,10 @@
 
 <script>
 import addButtonVue from './addButton.vue'
+import editButtonVue from './editButton.vue'
 export default {
     components : {
-        addButtonVue
+        addButtonVue, editButtonVue
     },
     data() {
         return {
@@ -68,17 +64,6 @@ export default {
             console.log(res.data)
         })
     },
-    mounted() {
-        
-    },
-    methods : {
-        handleEdit(data) {
-
-        },
-        handleLook(data) {
-            this.$router.push({ name : "problem", query: data })
-        }
-    }
 }
 </script>
 

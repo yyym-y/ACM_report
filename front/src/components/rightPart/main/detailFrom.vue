@@ -30,6 +30,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="Submit()">提交</el-button>
+          <el-button type="danger" @click="deleteSubmit()" v-if="type=='updata'">删除</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -38,7 +39,7 @@
 
 <script>
 export default {
-    props : ["title", "type"],
+    props : ["title", "type", "oldInfo", "problemId"],
     data() {
       return {
         vis : false,
@@ -82,8 +83,7 @@ export default {
           this.$message.err("type diff error");
         });
       },
-      insertsubmit() {
-        console.log(this.formInfo)
+      insertSubmit() {
         this.$api.project.insertProblem(
           {data : this.formInfo}
         ).then((res)=> {
@@ -94,16 +94,51 @@ export default {
           this.$message.success("问题添加成功")
         })
       },
+      updataSubmit() {
+        this.$api.project.updataProblem({
+          data : this.formInfo,
+          Problem_id : this.problemId
+        }).then((res) => {
+          res = res.data;
+          if(res.code == 0) {
+            this.$message.error("updata error"); return;
+          }
+          this.$message.success("问题修改成功")
+        })
+      },
+      deleteSubmit() {
+        this.$alert('将删除本题所有相关信息', '删除确认', {
+          confirmButtonText: '确定',
+          callback: action => {
+            if(action != "confirm")
+              return;
+            this.$api.project.deleteProblem({
+              Problem_id : this.problemId
+            }).then((res) => {
+              res = res.data;
+              if(res.code == 0) {
+                this.$message.error("delete error"); return;
+              }
+              this.$message.success("问题删除成功")
+            })
+          }
+        });
+      },
       Submit() {
         switch(this.type) {
           case "insert": {
-            this.insertsubmit(); break;
+            this.insertSubmit(); break;
+          }
+          case "updata": {
+            this.updataSubmit(); break;
           }
         }
       }
     },
     created() {
       this.readDiff(); this.readType();
+      if(this.type == "updata")
+        this.formInfo = this.oldInfo
     }
 }
 </script>

@@ -35,3 +35,4 @@ DELETE FROM problem_list WHERE problem_id=15;
 
 UPDATE descripe_list SET description="Alice and Bob came up with a rather strange game. They have an array of integers $a_1, a_2,\\ldots, a_n$. Alice chooses a certain integer $k$ and tells it to Bob, then the following happens:\n - Bob chooses two integers $i$ and $j$ ($1 \\le i < j \\le n$), and then finds the maximum among the integers $a_i, a_{i + 1},\\ldots, a_j$;\n - If the obtained maximum is **strictly greater** than $k$, Alice wins, otherwise Bob wins. Help Alice find the maximum $k$ at which she is guaranteed to win." WHERE problem_id = 9;
 
+ALTER TABLE problem_list AUTO_INCREMENT = 15;

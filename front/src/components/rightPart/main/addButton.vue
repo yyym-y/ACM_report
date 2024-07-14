@@ -14,16 +14,12 @@ export default {
     },
     data() {
       return {
-        clicked : false
+        
       }
     },
     methods : {
       clickedBottom() {
-        if(!this.clicked)
           this.$refs.form.openBox();
-        else
-          this.$refs.form.closeBox();
-        this.clicked = ~ this.clicked;
       }
     }
 }
