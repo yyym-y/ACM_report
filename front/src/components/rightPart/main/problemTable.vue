@@ -1,5 +1,6 @@
 <template>
   <div>
+    <addButtonVue></addButtonVue>
     <el-table :data="tableData" style="width: 1000px; max-width: 100" :ref="'table'">
         <el-table-column label="编号" width="100"> 
             <template slot-scope="scope">
@@ -49,7 +50,11 @@
 </template>
 
 <script>
+import addButtonVue from './addButton.vue'
 export default {
+    components : {
+        addButtonVue
+    },
     data() {
         return {
             tableData : {}

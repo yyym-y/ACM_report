@@ -1,7 +1,9 @@
 import request from './request';
 
 export default {
-    getTable, queryDetail, changeSolution, changeDescription
+    getTable, queryDetail, changeSolution, changeDescription,
+    queryAllDiffical, queryAllType, deleteProblem,
+    insertProblem, updataProblem
 }
 
 export function getTable() {
@@ -31,6 +33,44 @@ export function changeDescription(data) {
     return request({
         method : 'POST',
         url:'/problem/changeDescription',
+        data: data
+    })
+}
+
+export function queryAllDiffical() {
+    return request({
+        method : 'GET',
+        url:'/index/queryAllDiffical',
+    })
+}
+
+export function queryAllType () {
+    return request({
+        method : 'GET',
+        url:'/index/queryAllType',
+    })
+}
+
+export function deleteProblem(data) {
+    return request({
+        method : 'POST',
+        url:'/index/deleteProblem',
+        data: data
+    })
+}
+
+export function insertProblem(data) {
+    return request({
+        method : 'POST',
+        url:'/index/insertProblem',
+        data: data
+    })
+}
+
+export function updataProblem(data) {
+    return request({
+        method : 'POST',
+        url:'/index/updataProblem',
         data: data
     })
 }

@@ -24,6 +24,8 @@ var (
 				group.POST("/insertProblem", indexController.InsertProblem)
 				group.POST("/updataProblem", indexController.UpdataProblem)
 				group.POST("/deleteProblem", indexController.DeleteProblem)
+				group.GET("/queryAllType", indexController.QueryAllType)
+				group.GET("/queryAllDiffical", indexController.QueryAllDiffical)
 				group.GET("/table", indexController.Table)
 			})
 			s.Group("/problem", func(group *ghttp.RouterGroup) {

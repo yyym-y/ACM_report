@@ -41,3 +41,13 @@ func (c *IndexController) DeleteProblem(r *ghttp.Request) {
 	problemId := r.GetForm("Problem_id").Int()
 	r.Response.WriteJson(indexTableLogic.DeleteProblem(problemId))
 }
+
+func (c *IndexController) QueryAllType(r *ghttp.Request) {
+	r.Response.CORSDefault()
+	r.Response.WriteJson(indexTableLogic.QueryAllType())
+}
+
+func (c *IndexController) QueryAllDiffical(r *ghttp.Request) {
+	r.Response.CORSDefault()
+	r.Response.WriteJson(indexTableLogic.QueryAllDiffical())
+}

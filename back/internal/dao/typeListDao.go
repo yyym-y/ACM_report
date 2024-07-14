@@ -1,6 +1,10 @@
 package dao
 
-import "github.com/gogf/gf/v2/frame/g"
+import (
+	"back/api/problem"
+
+	"github.com/gogf/gf/v2/frame/g"
+)
 
 type TypeListDao struct{}
 
@@ -11,4 +15,9 @@ func NewTypeListDao() *TypeListDao {
 func (*TypeListDao) ReadType(type_id int) string {
 	ff, _ := g.Model("type_list").Where("type_id", type_id).One()
 	return ff["type_name"].String()
+}
+
+func (*TypeListDao) ReadAllType() (res []problem.TypeInfo) {
+	g.Model("type_list").Scan(&res)
+	return
 }

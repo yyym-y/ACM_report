@@ -41,3 +41,11 @@ func (*IndexTableLogic) DeleteProblem(problemId int) api.ApiRes {
 	flag := problemListDao.DeleteProblem(problemId)
 	return *api.CheckSuccessNone(flag, "delete error")
 }
+
+func (c *IndexTableLogic) QueryAllType() api.ApiRes {
+	return *api.SuccessRes(typeListDao.ReadAllType())
+}
+
+func (c *IndexTableLogic) QueryAllDiffical() api.ApiRes {
+	return *api.SuccessRes(difficultyDao.ReadAllDifficulty())
+}
