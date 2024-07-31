@@ -27,8 +27,10 @@ INSERT INTO problem_list VALUES(13, "C. Two Movies", "https://codeforces.com/pro
 INSERT INTO problem_list VALUES(14, "D. Smithing Skill", "https://codeforces.com/problemset/problem/1989/D", 1, "2024-7-12", 11);
 
 SELECT * from problem_list;
-SELECT * FROM descripe_list;
+SELECT * FROM type_list;
 SELECT * FROM solution_list;
+
+INSERT INTO type_list(type_name) VALUES("牛客");
 
 DELETE FROM problem_list WHERE problem_id=15;
 

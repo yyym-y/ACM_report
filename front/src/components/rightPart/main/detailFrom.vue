@@ -26,7 +26,7 @@
               :label="diff.Diff_name" :value="diff.Diff_id">
             </el-option>
           </el-select>
-          <el-button style="margin-left: 5px;">添加难度</el-button>
+          <el-button style="margin-left: 5px;" @click="openAddType()">添加难度</el-button>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="Submit()">提交</el-button>
@@ -34,12 +34,17 @@
         </el-form-item>
       </el-form>
     </el-dialog>
+    <addDiffVue ref="diff"></addDiffVue>
   </div>
 </template>
 
 <script>
+import addDiffVue from './addDiff.vue'
 export default {
     props : ["title", "type", "oldInfo", "problemId"],
+    components : {
+      addDiffVue
+    },
     data() {
       return {
         vis : false,
@@ -133,6 +138,9 @@ export default {
             this.updataSubmit(); break;
           }
         }
+      },
+      openAddType() {
+        this.$refs.diff.openBox()
       }
     },
     created() {

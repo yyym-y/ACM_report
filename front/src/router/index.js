@@ -6,7 +6,7 @@ import ProblemView from '@/view/ProblemView.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', name: "home", component: MainView },
+  { path: '/', name: "index", component: MainView },
   { path: '/problem', name: "problem", component: ProblemView },
 ]
 

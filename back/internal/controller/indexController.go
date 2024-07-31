@@ -51,3 +51,9 @@ func (c *IndexController) QueryAllDiffical(r *ghttp.Request) {
 	r.Response.CORSDefault()
 	r.Response.WriteJson(indexTableLogic.QueryAllDiffical())
 }
+
+func (c *IndexController) InsertDifficulty(r *ghttp.Request) {
+	r.Response.CORSDefault()
+	diff := r.GetForm("diff").String()
+	r.Response.WriteJson(indexTableLogic.InsertDifficulty(diff))
+}

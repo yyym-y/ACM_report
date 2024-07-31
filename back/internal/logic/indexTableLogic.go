@@ -49,3 +49,8 @@ func (c *IndexTableLogic) QueryAllType() api.ApiRes {
 func (c *IndexTableLogic) QueryAllDiffical() api.ApiRes {
 	return *api.SuccessRes(difficultyDao.ReadAllDifficulty())
 }
+
+func (*IndexTableLogic) InsertDifficulty(diff string) api.ApiRes {
+	flag := difficultyDao.InsertDifficulty(diff)
+	return *api.CheckSuccessNone(flag, "insert diff error")
+}

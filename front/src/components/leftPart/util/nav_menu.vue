@@ -4,7 +4,7 @@
         default-active="1"
         class="el-menu-vertical-demo">
   
-        <el-menu-item index="1">
+        <el-menu-item index="1" @click="toIndex()">
           <i class="el-icon-s-home"></i>
           <span slot="title" >首页</span>
         </el-menu-item>
@@ -25,5 +25,10 @@
   
   <script>
   export default {
+    methods : {
+      toIndex() {
+        this.$router.push({ name : "index" }).catch(err => {})
+      }
+    }
   }
   </script>

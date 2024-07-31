@@ -3,7 +3,7 @@ import request from './request';
 export default {
     getTable, queryDetail, changeSolution, changeDescription,
     queryAllDiffical, queryAllType, deleteProblem,
-    insertProblem, updataProblem
+    insertProblem, updataProblem, insertDifficulty
 }
 
 export function getTable() {
@@ -71,6 +71,14 @@ export function updataProblem(data) {
     return request({
         method : 'POST',
         url:'/index/updataProblem',
+        data: data
+    })
+}
+
+export function insertDifficulty(data) {
+    return request({
+        method : 'POST',
+        url:'/index/insertDifficulty',
         data: data
     })
 }

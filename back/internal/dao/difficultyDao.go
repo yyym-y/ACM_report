@@ -21,3 +21,12 @@ func (*DifficultyDao) ReadAllDifficulty() (res []problem.DifficultyInfo) {
 	g.Model("difficulty").Scan(&res)
 	return
 }
+
+func (*DifficultyDao) InsertDifficulty(diff string) bool {
+	data := g.Map{"diff_name": diff}
+	res, err := g.Model("difficulty").Insert(data)
+	if res == nil || err != nil {
+		return false
+	}
+	return true
+}
