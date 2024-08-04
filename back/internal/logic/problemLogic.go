@@ -3,7 +3,10 @@ package logic
 import (
 	"back/api"
 	"back/api/problem"
+	"back/internal/crawler"
 	"back/internal/dao"
+
+	"github.com/gocolly/colly"
 )
 
 type ProblemLogic struct{}
@@ -48,4 +51,12 @@ func (*ProblemLogic) ChangeSolution(problemId int, text string) api.ApiRes {
 		return *api.ErrorRes("change solution error")
 	}
 	return *api.SuccessResNone()
+}
+
+func (*ProblemLogic) ProblemCrawler(Type string, url string) api.ApiRes {
+	c := colly.NewCollector()
+	if Type == "codeforces" {
+		return *api.SuccessRes(crawler.CfCrawler(c, url))
+	}
+	return *api.ErrorRes("crowler not found")
 }

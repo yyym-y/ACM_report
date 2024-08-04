@@ -1,6 +1,7 @@
 <template>
   <div>
     <el-button size="mini" @click="change()">{{ bottomText }}</el-button>
+    <el-button size="mini" @click="clawer()" v-if="type == 'description'">爬取题目</el-button>
     <mavon-editor
         class="markdown"
         :value="context"
@@ -20,7 +21,7 @@
 <script>
 import { EventBus } from '@/bus/EventBus'
 export default {
-    props: ["context", "type", "problemId"],
+    props: ["context", "type", "problemId", "url", "pType"],
     data() {
         return {
             toolbars: {
@@ -31,6 +32,7 @@ export default {
             ifEdit : false,
             ifTool : false,
             bottomText : "编辑文本",
+            contextT : ""
         }
     },
     methods : {
@@ -46,10 +48,29 @@ export default {
                 problemId : this.problemId,
                 text : this.$refs.md.d_value
             })
+        },
+        clawer() {
+            this.$api.project.problemCrawler({
+                Type : this.pType,
+                Problem_url : this.url
+            }).then((res) => {
+                res = res.data
+                console.log(res)
+                if(res.code == 0) {
+                    this.$message.error("爬取失败，该类型爬虫不存在"); return
+                }
+                this.$message.success("爬取成功")
+                res = res.data
+                this.$refs.md.d_value = res
+                console.log(res)
+            }).catch((err) => {});
         }
     },
     beforeDestroy () {
         EventBus.$off(this.type)
+    },
+    created() {
+        this.contextT = this.context
     }
 }
 </script>

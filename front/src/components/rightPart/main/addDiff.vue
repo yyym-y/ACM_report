@@ -2,7 +2,7 @@
   <div>
     <el-dialog
         :visible.sync="vis" width="500px" title="添加难度">
-        <el-form :model="form" label-width="80px">
+        <el-form :model="forms" label-width="80px">
             <el-form-item label="难度名称">
                 <el-input v-model="forms.diff_name"></el-input>
             </el-form-item>

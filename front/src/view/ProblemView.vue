@@ -1,6 +1,7 @@
 <template>
   <div>
-    <showMarkdownVue :context="description" :type="'description'" :problemId="infos.Problem_id"></showMarkdownVue>
+    <showMarkdownVue :context="description" :type="'description'" :problemId="infos.Problem_id"
+        :pType="infos.Type" :url="infos.Problem_url"></showMarkdownVue>
     <el-divider></el-divider>
     <showMarkdownVue :context="solution" :type="'solution'" :problemId="infos.Problem_id"></showMarkdownVue>
   </div>

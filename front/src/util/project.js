@@ -3,7 +3,8 @@ import request from './request';
 export default {
     getTable, queryDetail, changeSolution, changeDescription,
     queryAllDiffical, queryAllType, deleteProblem,
-    insertProblem, updataProblem, insertDifficulty
+    insertProblem, updataProblem, insertDifficulty,
+    problemCrawler
 }
 
 export function getTable() {
@@ -80,5 +81,13 @@ export function insertDifficulty(data) {
         method : 'POST',
         url:'/index/insertDifficulty',
         data: data
+    })
+}
+
+export function problemCrawler(params) {
+    return request({
+        method : 'GET',
+        url:'/problem/problemCrawler',
+        params: params
     })
 }

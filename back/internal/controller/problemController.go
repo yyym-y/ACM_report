@@ -34,3 +34,10 @@ func (c *ProblemController) ChangeSolution(r *ghttp.Request) {
 	text := r.GetForm("text").String()
 	r.Response.WriteJson(problemLogic.ChangeSolution(problemId, text))
 }
+
+func (c *ProblemController) ProblemCrawler(r *ghttp.Request) {
+	r.Response.CORSDefault()
+	Type := r.GetQuery("Type").String()
+	url := r.GetQuery("Problem_url").String()
+	r.Response.WriteJson(problemLogic.ProblemCrawler(Type, url))
+}
