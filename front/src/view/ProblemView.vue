@@ -1,18 +1,20 @@
 <template>
   <div>
-    <showMarkdownVue :context="description" :type="'description'" :problemId="infos.Problem_id"
-        :pType="infos.Type" :url="infos.Problem_url"></showMarkdownVue>
+    <showMarkdown :context="description" :saveBusKey="'description'" :problemId="infos.Problem_id">
+        <el-button size="mini" @click="clawer()" >爬取题目</el-button>
+    </showMarkdown>
     <el-divider></el-divider>
-    <showMarkdownVue :context="solution" :type="'solution'" :problemId="infos.Problem_id"></showMarkdownVue>
+    <showMarkdown :context="solution" :saveBusKey="'solution'" :problemId="infos.Problem_id"></showMarkdown>
   </div>
 </template>
 
 <script>
-import showMarkdownVue from '../components/rightPart/problem/showMarkdown.vue'
+import showMarkdown from '@/components/rightPart/mdUtil/showMarkdown.vue';
 import { EventBus } from '@/bus/EventBus'
 export default {
+    name : "ProblemView",
     components : {
-        showMarkdownVue,
+        showMarkdown,
     },
     data() {
         return {
@@ -25,45 +27,34 @@ export default {
     created() {
         this.infos = this.$route.query
         let id = this.infos.Problem_id
-        let title = this.infos.Problem_name
-        this.$api.project.queryDetail({Problem_id: id}).then((res) => {
-            res = res.data;
-            if(res.code == 0) return
-            this.detail = res.data
+        this.$api.problem.queryMdDetail(this, {Problem_id: id}).then((res) => {
+            this.detail = res
             this.description = this.detail.Description
             this.solution = this.detail.Solution
         })
+
         EventBus.$on("description", (payload) => {
-            console.log(payload)
-            console.log(payload.text)
-            this.$api.project.changeDescription({
+            this.$api.problem.changeDescription(this, {
                 Problem_id : payload.problemId,
                 text : payload.text
-            }).then((res)=> {
-                res = res.data;
-                if(res.code == 0) {
-                    this.$message.error("保存失败"); return
-                }
-                this.$message.success("保存成功");
-            })
+            });
         });
         EventBus.$on("solution", (payload) => {
-            this.$api.project.changeSolution({
+            this.$api.problem.changeSolution(this, {
                 Problem_id : payload.problemId,
                 text : payload.text
-            }).then((res)=> {
-                res = res.data;
-                if(res.code == 0) {
-                    this.$message.error("保存失败"); return
-                }
-                this.$message.success("保存成功");
             })
         });
     },
-    methods: {
-        addTitle(title, context) {
-            context = "## " + title + "\n" + context;
-            return context;
+    methods : {
+        clawer() {
+            this.$api.problem.problemCrawler(this, {
+                Type : this.infos.Type,
+                Problem_url : this.infos.Problem_url
+            }).then((res) => {
+                if(res != null)
+                    this.description = res
+            });
         }
     }
 }

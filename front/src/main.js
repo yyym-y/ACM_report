@@ -5,7 +5,7 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import router from "./router/index"
 import axios from 'axios'
-import api from './util/index.js'
+import api from './network/index.js'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 
