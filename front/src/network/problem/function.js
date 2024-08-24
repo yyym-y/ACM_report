@@ -15,7 +15,7 @@ export function changeSolution( data, self ) {
         }
         self.$message.success("保存成功 :)");
     }).catch((err) => {
-        self.$message.err("服务器异常" + err);
+        self.$message.error("服务器异常 " + err);
     }); 
 }
 // 修改题目描述
@@ -27,7 +27,7 @@ export function changeDescription( self, data ) {
         }
         self.$message.success("保存成功 :)");
     }).catch((err) => {
-        self.$message.err("服务器异常" + err);
+        self.$message.error("服务器异常 " + err);
     }); 
 }
 
@@ -36,11 +36,11 @@ export function queryMdDetail( self, data ) {
     return header.queryMdDetail(data).then((res) => {
         res = res.data;
         if(res.data == 0) {
-            self.$message.err("题目详情获取失败..."); return
+            self.$message.error("题目详情获取失败..."); return
         }
         return res.data
     }).catch((err) => {
-        self.$message.err("服务器异常" + err);
+        self.$message.error("服务器异常 " + err);
     }); 
 }
 
@@ -54,6 +54,6 @@ export function problemCrawler( self, data ) {
         self.$message.success("爬取成功")
         return res.data
     }).catch((err) => {
-        self.$message.err("服务器异常" + err);
+        self.$message.error("服务器异常 " + err);
     }); 
 }

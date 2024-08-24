@@ -33,6 +33,7 @@ var (
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
 				group.POST("/changeDescription", problemController.ChangeDescription)
 				group.POST("/changeSolution", problemController.ChangeSolution)
+				group.POST("/export", problemController.ExportProblem)
 				group.GET("/problemCrawler", problemController.ProblemCrawler)
 				group.GET("/queryDetail", problemController.QueryDetail)
 			})

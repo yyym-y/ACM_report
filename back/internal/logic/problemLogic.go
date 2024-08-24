@@ -1,12 +1,19 @@
 package logic
 
 import (
+	"archive/zip"
 	"back/api"
 	"back/api/problem"
 	"back/internal/crawler"
 	"back/internal/dao"
+	"bytes"
+	"fmt"
+	"strconv"
+
+	// "fmt"
 
 	"github.com/gocolly/colly"
+	"github.com/gogf/gf/v2/net/ghttp"
 )
 
 type ProblemLogic struct{}
@@ -59,4 +66,25 @@ func (*ProblemLogic) ProblemCrawler(Type string, url string) api.ApiRes {
 		return *api.SuccessRes(crawler.CfCrawler(c, url))
 	}
 	return *api.ErrorRes("crowler not found")
+}
+
+func (p *ProblemLogic) ExportProblem(nums []interface{}, r *ghttp.Request) []byte {
+	buf := new(bytes.Buffer)
+	zw := zip.NewWriter(buf)
+	for i := 0; i < len(nums); i++ {
+		numStr := fmt.Sprintf("%v", i)
+		f, _ := zw.Create(numStr + ".md")
+		num, _ := strconv.Atoi(fmt.Sprintf("%v", nums[i]))
+		f.Write(p.readProblem(num))
+	}
+	zw.Close()
+	return buf.Bytes()
+}
+
+func (p *ProblemLogic) readProblem(problemId int) []byte {
+	detail := p.ReadProblemDetail(problemId)
+	fileContent := detail.Description
+	fileContent += "\n\n\n\n\n\n\n---\n\n\n## 题解\n"
+	fileContent += detail.Solution
+	return []byte(fileContent)
 }

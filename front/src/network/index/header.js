@@ -4,7 +4,8 @@ export default {
     insertDifficulty, insertProblem, 
     deleteProblem,
     updataProblem,
-    queryAllType, queryAllDiffical, queryAllProblem
+    queryAllType, queryAllDiffical, queryAllProblem,
+    exportProblem
 }
 
 
@@ -62,5 +63,15 @@ export function queryAllProblem() {
     return request({
         method :'GET',
         url:'/index/table',
+    })
+}
+
+// 导出问题
+export function exportProblem( data ) {
+    return request({
+        method : 'POST',
+        url:'/problem/export',
+        data: data,
+        responseType: 'blob',
     })
 }

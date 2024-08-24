@@ -3,6 +3,7 @@ package controller
 import (
 	"back/api"
 	"back/internal/logic"
+
 	"github.com/gogf/gf/v2/net/ghttp"
 )
 
@@ -39,4 +40,10 @@ func (c *ProblemController) ProblemCrawler(r *ghttp.Request) {
 	Type := r.GetQuery("Type").String()
 	url := r.GetQuery("Problem_url").String()
 	r.Response.WriteJson(problemLogic.ProblemCrawler(Type, url))
+}
+
+func (c *ProblemController) ExportProblem(r *ghttp.Request) {
+	r.Response.CORSDefault()
+	nums := r.GetForm("nums").Array()
+	r.Response.Write(problemLogic.ExportProblem(nums, r))
 }
