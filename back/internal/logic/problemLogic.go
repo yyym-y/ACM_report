@@ -10,8 +10,6 @@ import (
 	"fmt"
 	"strconv"
 
-	// "fmt"
-
 	"github.com/gocolly/colly"
 	"github.com/gogf/gf/v2/net/ghttp"
 )
@@ -71,20 +69,28 @@ func (*ProblemLogic) ProblemCrawler(Type string, url string) api.ApiRes {
 func (p *ProblemLogic) ExportProblem(nums []interface{}, r *ghttp.Request) []byte {
 	buf := new(bytes.Buffer)
 	zw := zip.NewWriter(buf)
-	for i := 0; i < len(nums); i++ {
-		numStr := fmt.Sprintf("%v", i)
-		f, _ := zw.Create(numStr + ".md")
-		num, _ := strconv.Atoi(fmt.Sprintf("%v", nums[i]))
-		f.Write(p.readProblem(num))
+	contents := make(chan []byte, len(nums)) // 缓冲通道
+	defer close(contents)
+	for _, pr := range nums {
+		num, _ := strconv.Atoi(fmt.Sprintf("%v", pr))
+		go p.readProblem(num, &contents)
+	}
+	for i := 1; i <= len(nums); i++ {
+		select {
+		case ffile := <-contents:
+			numStr := fmt.Sprintf("%v", i)
+			f, _ := zw.Create(numStr + "problem.md")
+			f.Write(ffile)
+		}
 	}
 	zw.Close()
 	return buf.Bytes()
 }
 
-func (p *ProblemLogic) readProblem(problemId int) []byte {
+func (p *ProblemLogic) readProblem(problemId int, ch *chan []byte) {
 	detail := p.ReadProblemDetail(problemId)
 	fileContent := detail.Description
 	fileContent += "\n\n\n\n\n\n\n---\n\n\n## 题解\n"
 	fileContent += detail.Solution
-	return []byte(fileContent)
+	*ch <- []byte(fileContent)
 }
