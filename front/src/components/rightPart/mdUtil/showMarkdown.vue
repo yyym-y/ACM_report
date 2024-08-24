@@ -50,6 +50,9 @@ export default {
                 text : this.$refs.md.d_value
             })
         },
+        changeContext( ss ) {
+            this.$refs.md.d_value = ss;
+        }
     },
     beforeDestroy () {
         EventBus.$off(this.type)
@@ -57,9 +60,9 @@ export default {
     created() {
         this.contextT = this.context
     },
-    watch: {
-        context(newVal, oldVal) {
-            this.contextT = newVal
+    watch : {
+        context(newV, oldV) {
+            this.contextT = newV
         }
     }
 }

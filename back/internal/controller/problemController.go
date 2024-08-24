@@ -3,8 +3,6 @@ package controller
 import (
 	"back/api"
 	"back/internal/logic"
-	"fmt"
-
 	"github.com/gogf/gf/v2/net/ghttp"
 )
 

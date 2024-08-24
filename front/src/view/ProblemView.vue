@@ -1,6 +1,6 @@
 <template>
   <div>
-    <showMarkdown :context="description" :saveBusKey="'description'" :problemId="infos.Problem_id">
+    <showMarkdown :context="description" :saveBusKey="'description'" :problemId="infos.Problem_id" :ref="'desc'">
         <el-button size="mini" @click="clawer()" >爬取题目</el-button>
     </showMarkdown>
     <el-divider></el-divider>
@@ -52,8 +52,9 @@ export default {
                 Type : this.infos.Type,
                 Problem_url : this.infos.Problem_url
             }).then((res) => {
-                if(res != null)
-                    this.description = res
+                if(res != null) {
+                    this.$refs.desc.changeContext(res)
+                }
             });
         }
     }
