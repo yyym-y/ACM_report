@@ -44,3 +44,8 @@ func (*ProblemListDao) UpdataProblem(problemId int, data problem.ProblemInfo) bo
 	}
 	return true
 }
+
+func (*ProblemListDao) QueryOneProblem(problemId int) (res index.IndexTableInfo) {
+	g.Model("problem_list").Where("problem_id", problemId).Scan(&res)
+	return
+}

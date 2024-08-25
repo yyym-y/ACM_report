@@ -3,6 +3,7 @@ package logic
 import (
 	"archive/zip"
 	"back/api"
+	"back/api/index"
 	"back/api/problem"
 	"back/internal/crawler"
 	"back/internal/dao"
@@ -69,17 +70,20 @@ func (*ProblemLogic) ProblemCrawler(Type string, url string) api.ApiRes {
 func (p *ProblemLogic) ExportProblem(nums []interface{}, r *ghttp.Request) []byte {
 	buf := new(bytes.Buffer)
 	zw := zip.NewWriter(buf)
-	contents := make(chan []byte, len(nums)) // 缓冲通道
+	problemMap := make(map[int]index.IndexTableInfo)
+
+	contents := make(chan struct {string; []byte}, len(nums))
 	defer close(contents)
 	for _, pr := range nums {
 		num, _ := strconv.Atoi(fmt.Sprintf("%v", pr))
+		problemMap[num] = problemListDao.QueryOneProblem(num)
 		go p.readProblem(num, &contents)
 	}
 	for i := 1; i <= len(nums); i++ {
 		select {
 		case ffile := <-contents:
 			numStr := fmt.Sprintf("%v", i)
-			f, _ := zw.Create(numStr + "problem.md")
+			f, _ := zw.Create(problemMap[])
 			f.Write(ffile)
 		}
 	}
