@@ -7,7 +7,7 @@ export default {
 }
 
 // 修改题解
-export function changeSolution( data, self ) {
+export function changeSolution( self, data ) {
     header.changeSolution(data).then((res)=> {
         res = res.data;
         if(res.code == 0) {

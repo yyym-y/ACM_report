@@ -17,10 +17,11 @@ var (
 		Brief: "start http server",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 			s := g.Server()
+
 			indexController := controller.NewIndexController()
 			problemController := controller.NewProblemController()
 			s.Group("/index", func(group *ghttp.RouterGroup) {
-				group.Middleware(ghttp.MiddlewareHandlerResponse)
+				// group.Middleware(ghttp.MiddlewareHandlerResponse)
 				group.POST("/insertProblem", indexController.InsertProblem)
 				group.POST("/updataProblem", indexController.UpdataProblem)
 				group.POST("/deleteProblem", indexController.DeleteProblem)
@@ -30,7 +31,7 @@ var (
 				group.GET("/table", indexController.Table)
 			})
 			s.Group("/problem", func(group *ghttp.RouterGroup) {
-				group.Middleware(ghttp.MiddlewareHandlerResponse)
+				// group.Middleware(ghttp.MiddlewareHandlerResponse)
 				group.POST("/changeDescription", problemController.ChangeDescription)
 				group.POST("/changeSolution", problemController.ChangeSolution)
 				group.POST("/export", problemController.ExportProblem)

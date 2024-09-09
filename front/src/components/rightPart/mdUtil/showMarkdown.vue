@@ -55,7 +55,7 @@ export default {
         }
     },
     beforeDestroy () {
-        EventBus.$off(this.type)
+        EventBus.$off(this.saveBusKey)
     },
     created() {
         this.contextT = this.context

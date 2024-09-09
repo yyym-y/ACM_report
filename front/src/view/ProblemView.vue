@@ -46,6 +46,10 @@ export default {
             })
         });
     },
+    destroyed() {
+        EventBus.$off("description");
+        EventBus.$off("solution");
+    },
     methods : {
         clawer() {
             this.$api.problem.problemCrawler(this, {
@@ -53,6 +57,7 @@ export default {
                 Problem_url : this.infos.Problem_url
             }).then((res) => {
                 if(res != null) {
+                    console.log(res)
                     this.$refs.desc.changeContext(res)
                 }
             });
