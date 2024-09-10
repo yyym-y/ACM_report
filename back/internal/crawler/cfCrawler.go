@@ -1,8 +1,10 @@
 package crawler
 
 import (
-	"github.com/gocolly/colly"
+	"regexp"
 	"strings"
+
+	"github.com/gocolly/colly"
 )
 
 type cfCrawler struct {
@@ -18,6 +20,8 @@ func NewCF(url string) *cfCrawler {
 }
 
 func (*cfCrawler) getMarkdown(html string) (str string) {
+	re := regexp.MustCompile(`<span class="tex-font-style-bf">(.*?)</span>`)
+	html = re.ReplaceAllString(html, `<strong>$1</strong>`)
 	str = GetMarkdown(html)
 	return
 }

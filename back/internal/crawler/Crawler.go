@@ -2,7 +2,6 @@ package crawler
 
 import (
 	"fmt"
-	"regexp"
 	"strings"
 
 	md "github.com/JohannesKaufmann/html-to-markdown"
@@ -11,9 +10,6 @@ import (
 
 func GetMarkdown(htmlContent string) (markdown string) {
 	if markdown == "" {
-		re := regexp.MustCompile(`<span class="tex-font-style-bf">(.*?)</span>`)
-		htmlContent := re.ReplaceAllString(htmlContent, `<strong>$1</strong>`)
-
 		doc, err := goquery.NewDocumentFromReader(strings.NewReader(htmlContent))
 		if err != nil {
 			return fmt.Sprintf("Error loading HTML content: %v \n", err)
@@ -44,6 +40,8 @@ func RUNCrawler(p_type string, url string) (str string) {
 	switch p_type {
 	case "codeforces":
 		str = NewCF(url).run()
+	case "Atcoder":
+		str = NewAT(url).run()
 	}
 	return
 }
