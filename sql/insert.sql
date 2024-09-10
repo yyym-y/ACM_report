@@ -31,6 +31,7 @@ SELECT * FROM type_list;
 SELECT * FROM solution_list;
 
 INSERT INTO type_list(type_name) VALUES("牛客");
+INSERT INTO type_list(type_name) VALUES("Atcoder");
 
 DELETE FROM problem_list WHERE problem_id=15;
 

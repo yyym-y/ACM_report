@@ -10,7 +10,6 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/gocolly/colly"
 	"github.com/gogf/gf/v2/net/ghttp"
 )
 
@@ -59,11 +58,11 @@ func (*ProblemLogic) ChangeSolution(problemId int, text string) api.ApiRes {
 }
 
 func (*ProblemLogic) ProblemCrawler(Type string, url string) api.ApiRes {
-	c := colly.NewCollector()
-	if Type == "codeforces" {
-		return *api.SuccessRes(crawler.CfCrawler(c, url))
+	str := crawler.RUNCrawler(Type, url)
+	if str == "" {
+		return *api.ErrorRes("crowler not found")
 	}
-	return *api.ErrorRes("crowler not found")
+	return *api.SuccessRes(str)
 }
 
 func (p *ProblemLogic) ExportProblem(nums []interface{}, r *ghttp.Request) []byte {
