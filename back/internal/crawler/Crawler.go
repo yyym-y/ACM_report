@@ -42,6 +42,8 @@ func RUNCrawler(p_type string, url string) (str string) {
 		str = NewCF(url).run()
 	case "Atcoder":
 		str = NewAT(url).run()
+	case "Hdu":
+		str = NewHDU(url).run()
 	}
 	return
 }
