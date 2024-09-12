@@ -98,7 +98,7 @@ export default {
           callback: action => {
             if(action != "confirm")
               return;
-            this.$api.index.deleteProblem(this, {Problem_id : this.Problem_id});
+            this.$api.index.deleteProblem(this, {Problem_id : this.problemId});
           }
         });
       },
